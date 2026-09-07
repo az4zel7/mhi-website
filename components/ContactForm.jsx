@@ -125,12 +125,6 @@ export default function ContactForm() {
           Something went wrong sending that. Please try again or email us directly.
         </p>
       )}
-
-      <p className="form-note">
-        Submissions currently log to the server console via{" "}
-        <code>/api/contact</code>. Connect that route to your email inbox or
-        CRM before launch — see the README for options.
-      </p>
     </form>
   );
 }

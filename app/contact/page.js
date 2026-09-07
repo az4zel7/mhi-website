@@ -24,11 +24,16 @@ export default function ContactPage() {
             <h2>Reach us directly</h2>
             <div className="info-row">
               <div className="k">Office address</div>
-              <div className="v placeholder">Add your office address here</div>
+              <div className="v">
+                Shroff Mansion, 3rd Bhoiwada Ln, Marine Lines East,
+                Panjarpole, Bhuleshwar, Mumbai, Maharashtra 400002
+              </div>
             </div>
             <div className="info-row">
               <div className="k">Phone</div>
-              <div className="v placeholder">Add your phone number here</div>
+              <div className="v">
+                <a href="tel:+917045208003">+91 70452 08003</a>
+              </div>
             </div>
             <div className="info-row">
               <div className="k">Email</div>
@@ -36,7 +41,7 @@ export default function ContactPage() {
             </div>
             <div className="info-row">
               <div className="k">Business hours</div>
-              <div className="v placeholder">Add your business hours here</div>
+              <div className="v">10:00 AM – 7:30 PM</div>
             </div>
           </div>
         </div>
