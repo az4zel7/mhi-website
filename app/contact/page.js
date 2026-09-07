@@ -8,7 +8,6 @@ export default function ContactPage() {
   return (
     <div>
       <section className="wrap">
-        <div className="eyebrow-line">Get in touch</div>
         <h1 style={{ fontSize: "clamp(32px,4.4vw,42px)", maxWidth: "18ch" }}>
           Tell us about your business.
         </h1>

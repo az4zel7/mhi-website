@@ -20,7 +20,7 @@ export default function Header() {
     <header className="site-nav">
       <div className="wrap nav-inner">
         <Link href="/" className="brand-mark" onClick={() => setOpen(false)}>
-          <Image src={mhiLogo} alt="Milton Hosiery Industries" height={36} priority />
+          <Image src={mhiLogo} alt="Milton Hosiery Industries" height={72} priority />
           <span className="name">
             Milton Hosiery Industries
             <span>Since 1973 &middot; Mumbai</span>
@@ -51,7 +51,7 @@ export default function Header() {
             className={`nav-cta${pathname === "/contact" ? " active" : ""}`}
             onClick={() => setOpen(false)}
           >
-            Wholesale enquiry
+            Contact us
           </Link>
         </nav>
       </div>

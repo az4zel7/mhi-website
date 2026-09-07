@@ -93,7 +93,7 @@ header.site-nav {
   gap: 12px;
 }
 .brand-mark img {
-  height: 36px;
+  height: 72px;
   width: auto;
 }
 .brand-mark .name {
@@ -575,79 +575,113 @@ h1.hero-title {
 }
 
 /* ---------- PRODUCTS ---------- */
-.tabs {
-  display: flex;
-  gap: 8px;
-  background: var(--pale);
-  padding: 8px;
-  border-radius: 999px;
-  overflow-x: auto;
-  width: fit-content;
-  max-width: 100%;
+.segmented-nav-wrap {
+  padding: 40px 0 0;
 }
-.tab-btn {
-  background: none;
-  border: none;
-  padding: 13px 24px;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  border-radius: 999px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-.tab-btn:hover {
-  color: var(--blue-deep);
-}
-.tab-btn.active {
-  color: var(--white);
-  background: var(--brand-accent, var(--blue));
-  box-shadow: 0 10px 24px -10px rgba(12, 44, 85, 0.5);
-}
-
-.brand-panel {
-  padding-top: 52px;
-}
-.brand-head {
+.segmented-nav {
   display: flex;
   align-items: center;
-  gap: 26px;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
+  gap: 4px;
+  border-bottom: 2px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.brand-head img {
-  height: 60px;
-  width: auto;
+.segmented-nav::-webkit-scrollbar {
+  display: none;
 }
-.brand-head .wordmark-lg {
+.segment {
+  background: none;
+  border: none;
+  padding: 14px 30px;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s ease;
+}
+.segment img {
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+.segment.active img,
+.segment:hover img {
+  opacity: 1;
+}
+.segment::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -2px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.segment:hover {
+  color: var(--blue-deep);
+}
+.segment.active {
+  color: var(--blue-deep);
+}
+.segment.active::after {
+  background: var(--brand-accent, var(--blue));
+}
+
+.brand-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--brand-accent-soft, var(--pale)) 0%, var(--white) 100%);
+  padding: 56px 0 44px;
+}
+.brand-hero-blob {
+  width: 420px;
+  height: 420px;
+  top: -220px;
+  right: -120px;
+  background: radial-gradient(circle at 30% 30%, var(--brand-accent, var(--blue)), transparent 70%);
+  opacity: 0.16;
+}
+.brand-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+}
+.brand-hero .wordmark-lg {
   font-family: var(--font-poppins), sans-serif;
   font-weight: 600;
-  font-size: 40px;
+  font-size: 46px;
   color: var(--brand-accent, var(--blue));
 }
-.brand-meta .seg-tag {
+.brand-hero .seg-tag {
   font-size: 12.5px;
   font-weight: 600;
   color: var(--white);
   background: var(--brand-accent, var(--blue));
   display: inline-block;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 999px;
-  margin-bottom: 10px;
 }
-.brand-meta p {
+.brand-hero-desc {
   color: var(--ink-soft);
-  max-width: 56ch;
-  font-size: 15.5px;
+  max-width: 58ch;
+  font-size: 16px;
+  margin: 0;
 }
 
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 40px;
+  gap: 26px;
 }
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -659,29 +693,61 @@ h1.hero-title {
 }
 .p-card {
   background: var(--white);
-  border-radius: 22px;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 12px 30px -16px rgba(12, 44, 85, 0.22);
+  box-shadow: 0 12px 30px -18px rgba(12, 44, 85, 0.25);
   border: 1px solid var(--line);
-  transition: transform 0.2s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+.p-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
 }
 .p-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px -16px rgba(12, 44, 85, 0.32);
 }
 .p-swatch {
-  aspect-ratio: 4 / 3;
-  background: radial-gradient(circle at 30% 25%, var(--swatch-a, #dbe8fb), var(--swatch-b, #aecafb));
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(155deg, var(--swatch-a, #dbe8fb) 0%, var(--swatch-b, #aecafb) 100%);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.p-swatch .ph-label {
+.garment-mark {
+  width: 46%;
+  height: 46%;
+  color: var(--mark-color, var(--blue));
+  opacity: 0.55;
+  transition: transform 0.25s ease;
+}
+.p-card:hover .garment-mark {
+  transform: scale(1.08) translateY(-2px);
+}
+.p-view-tag {
   position: absolute;
   bottom: 12px;
   left: 12px;
   font-size: 11px;
-  color: var(--blue-deep);
-  background: rgba(255, 255, 255, 0.75);
-  padding: 4px 10px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--brand-accent, var(--blue));
+  padding: 5px 12px;
   border-radius: 999px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.2s ease;
+}
+.p-card:hover .p-view-tag {
+  opacity: 1;
+  transform: none;
 }
 .p-info {
   padding: 20px 22px 24px;
@@ -689,7 +755,7 @@ h1.hero-title {
 .p-info h3 {
   font-family: var(--font-poppins), sans-serif;
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: 16px;
   margin-bottom: 6px;
   color: var(--blue-deep);
 }
@@ -868,4 +934,119 @@ footer {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ---------- PRODUCT MODAL ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 44, 85, 0.45);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 100;
+  animation: modalFadeIn 0.18s ease both;
+}
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-panel {
+  background: var(--white);
+  border-radius: 28px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 40px 80px -20px rgba(12, 44, 85, 0.5);
+  animation: modalRise 0.22s ease both;
+}
+@keyframes modalRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--blue-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 6px 16px rgba(12, 44, 85, 0.2);
+}
+.modal-close:hover {
+  background: var(--white);
+}
+.modal-swatch {
+  aspect-ratio: 16 / 9;
+  border-radius: 28px 28px 0 0;
+  background: linear-gradient(155deg, var(--swatch-a, #dbe8fb) 0%, var(--swatch-b, #aecafb) 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-swatch .garment-mark {
+  width: 26%;
+  height: 26%;
+  opacity: 0.55;
+}
+.modal-swatch .ph-label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-size: 11.5px;
+  color: var(--blue-deep);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.modal-body {
+  padding: 32px 34px 36px;
+}
+.modal-brand-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.modal-body h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.modal-summary {
+  font-size: 15.5px;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+.modal-details {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin: 0;
 }
