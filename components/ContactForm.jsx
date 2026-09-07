@@ -103,7 +103,7 @@ export default function ContactForm() {
         <label htmlFor="f-message">Message</label>
         <textarea
           id="f-message"
-          rows={5}
+          rows={3}
           required
           placeholder="Tell us about your business and what you're looking for"
           value={form.message}

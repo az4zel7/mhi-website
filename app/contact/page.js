@@ -43,10 +43,10 @@ export default function ContactPage() {
   return (
     <div>
       <section className="wrap contact-hero">
-        <h1 style={{ fontSize: "clamp(32px,4.4vw,46px)", maxWidth: "18ch" }}>
+        <h1 style={{ fontSize: "clamp(26px,3.2vw,36px)", maxWidth: "20ch" }}>
           Tell us about your business.
         </h1>
-        <p className="about-lede" style={{ marginBottom: "50px" }}>
+        <p className="about-lede" style={{ marginTop: "10px", marginBottom: "28px", fontSize: "15.5px" }}>
           This form is the fastest way to reach us for wholesale, distribution
           or institutional supply. We reply directly — no call centre in
           between.
