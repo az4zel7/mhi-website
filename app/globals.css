@@ -714,7 +714,7 @@ h1.hero-title {
   box-shadow: 0 22px 40px -16px rgba(12, 44, 85, 0.32);
 }
 .p-swatch {
-  aspect-ratio: 1 / 1;
+  height: 210px;
   background: linear-gradient(155deg, var(--swatch-a, #dbe8fb) 0%, var(--swatch-b, #aecafb) 100%);
   position: relative;
   display: flex;
@@ -722,8 +722,8 @@ h1.hero-title {
   justify-content: center;
 }
 .garment-mark {
-  width: 46%;
-  height: 46%;
+  width: 84px;
+  height: 84px;
   color: var(--mark-color, var(--blue));
   opacity: 0.55;
   transition: transform 0.25s ease;
