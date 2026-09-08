@@ -1,4 +1,4 @@
-pro{
+{
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
