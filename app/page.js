@@ -6,39 +6,42 @@ import { BRANDS } from "@/lib/brands";
 export default function HomePage() {
   return (
     <div>
-      <section className="hero wrap">
+      <section className="hero">
         <div className="blob blob-a" />
         <div className="blob blob-b" />
-        <div className="hero-grid">
-          <div>
-            <div className="eyebrow-line">Family-run since 1973</div>
-            <h1 className="hero-title">
-              Apparel brands built for how people actually get dressed.
-            </h1>
-            <p className="hero-copy">
-              Milton Hosiery Industries designs and owns a portfolio of apparel
-              brands out of Mumbai — now run by the second generation of the
-              family that started it. We work with a small group of trusted
-              manufacturing partners to bring each brand to retailers,
-              distributors and institutional buyers across the country.
-            </p>
-            <div className="hero-actions">
-              <Link href="/contact" className="btn btn-primary">
-                Start a wholesale enquiry
-              </Link>
-              <Link href="/products" className="btn btn-outline">
-                See our brands
-              </Link>
+        <div className="wrap">
+          <div className="hero-grid">
+            <div>
+              <div className="eyebrow-line">Family-run since 1973</div>
+              <h1 className="hero-title">
+                Apparel brands built for how people actually get dressed.
+              </h1>
+              <p className="hero-copy">
+                Milton Hosiery Industries designs and owns a portfolio of
+                apparel brands out of Mumbai — now run by the second
+                generation of the family that started it. We work with a
+                small group of trusted manufacturing partners to bring each
+                brand to retailers, distributors and institutional buyers
+                across the country.
+              </p>
+              <div className="hero-actions">
+                <Link href="/contact" className="btn btn-primary">
+                  Start a wholesale enquiry
+                </Link>
+                <Link href="/products" className="btn btn-outline">
+                  See our brands
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="hero-panel">
-            <div className="label">What we do</div>
-            <div className="figure">Brand &amp; distribution</div>
-            <p>
-              We design, name and market each brand ourselves. Production runs
-              through a small set of contract manufacturing partners — we
-              don&apos;t operate our own factory floor.
-            </p>
+            <div className="hero-panel">
+              <div className="label">What we do</div>
+              <div className="figure">Brand &amp; distribution</div>
+              <p>
+                We design, name and market each brand ourselves. Production
+                runs through a small set of contract manufacturing partners —
+                we don&apos;t operate our own factory floor.
+              </p>
+            </div>
           </div>
         </div>
       </section>

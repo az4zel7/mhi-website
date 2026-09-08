@@ -220,8 +220,7 @@ section {
 .blob {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, var(--blue-sky), var(--blue) 70%);
-  filter: blur(2px);
+  background: radial-gradient(circle at 30% 30%, var(--blue-sky) 0%, var(--blue) 55%, transparent 75%);
   opacity: 0.14;
   z-index: 0;
   pointer-events: none;
@@ -231,7 +230,8 @@ section {
 .hero {
   padding-top: 64px;
   padding-bottom: 0;
-  overflow: visible;
+  position: relative;
+  overflow: hidden;
 }
 .hero .blob-a {
   width: 520px;
