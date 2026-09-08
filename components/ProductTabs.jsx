@@ -5,29 +5,11 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { BRANDS } from "@/lib/brands";
 import ProductModal from "@/components/ProductModal";
+import ProductCard from "@/components/ProductCard";
 
 // Products page shows only ANICY, NICY and Avron as tabs — Milton isn't a
 // standalone product line here. It still appears on the Home page brand strip.
 const TAB_BRANDS = BRANDS.filter((b) => b.slug !== "milton");
-
-function GarmentMark({ accent }) {
-  return (
-    <svg
-      className="garment-mark"
-      viewBox="0 0 64 64"
-      fill="none"
-      style={{ "--mark-color": accent }}
-      aria-hidden="true"
-    >
-      <path
-        d="M22 8 L14 16 L18 22 L22 19 V54 H42 V19 L46 22 L50 16 L42 8 C42 12 38 15 32 15 C26 15 22 12 22 8Z"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export default function ProductTabs() {
   const searchParams = useSearchParams();
@@ -110,25 +92,12 @@ export default function ProductTabs() {
         ) : (
           <div className="product-grid">
             {brand.products.map((product) => (
-              <button
-                className="p-card"
+              <ProductCard
                 key={product.name}
-                onClick={() => setSelectedProduct(product)}
-                aria-haspopup="dialog"
-                style={{ "--brand-accent": brand.accent }}
-              >
-                <div
-                  className="p-swatch"
-                  style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
-                >
-                  <GarmentMark accent={brand.accent} />
-                  <span className="p-view-tag">View details</span>
-                </div>
-                <div className="p-info">
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                </div>
-              </button>
+                product={product}
+                brandAccent={brand.accent}
+                onSelect={() => setSelectedProduct(product)}
+              />
             ))}
           </div>
         )}

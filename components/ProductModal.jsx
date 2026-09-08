@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import ProductCarousel from "@/components/ProductCarousel";
 
 function GarmentMark({ accent }) {
   return (
@@ -36,6 +37,8 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
 
   if (!product) return null;
 
+  const hasImages = (product.images || []).length > 0;
+
   return (
     <div
       className="modal-overlay"
@@ -48,20 +51,30 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
         <button className="modal-close" aria-label="Close" onClick={onClose}>
           &times;
         </button>
-        <div
-          className="modal-swatch"
-          style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
-        >
-          <GarmentMark accent={accent} />
-          <span className="ph-label">Photo pending</span>
-        </div>
+        {hasImages ? (
+          <div className="modal-media">
+            <ProductCarousel
+              images={product.images}
+              alt={product.name}
+              accent={accent}
+            />
+          </div>
+        ) : (
+          <div
+            className="modal-swatch"
+            style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
+          >
+            <GarmentMark accent={accent} />
+            <span className="ph-label">Photo pending</span>
+          </div>
+        )}
         <div className="modal-body">
           <div className="modal-brand-tag" style={{ background: accent }}>
             {brandName}
           </div>
           <h3 id="product-modal-title">{product.name}</h3>
           <p className="modal-summary">{product.description}</p>
-          <p className="modal-details">{product.details}</p>
+          {product.details && <p className="modal-details">{product.details}</p>}
         </div>
       </div>
     </div>
