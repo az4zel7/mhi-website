@@ -4,6 +4,14 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const HOVER_INTERVAL_MS = 900;
+const SHORT_DESC_MAX = 90;
+
+function shortenDescription(text) {
+  if (!text || text.length <= SHORT_DESC_MAX) return text;
+  const cut = text.slice(0, SHORT_DESC_MAX);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 40 ? lastSpace : SHORT_DESC_MAX)}…`;
+}
 
 function GarmentMark({ accent }) {
   return (
@@ -98,7 +106,7 @@ export default function ProductCard({ product, brandAccent, onSelect }) {
       )}
       <div className="p-info">
         <h3>{product.name}</h3>
-        <p>{product.description}</p>
+        <p>{shortenDescription(product.description)}</p>
       </div>
     </button>
   );
