@@ -718,32 +718,49 @@ h1.hero-title {
   box-shadow: 0 22px 40px -16px rgba(12, 44, 85, 0.32);
 }
 .p-swatch {
-  height: 210px;
+  height: 440px;
   background: linear-gradient(155deg, var(--swatch-a, #dbe8fb) 0%, var(--swatch-b, #aecafb) 100%);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.p-media {
-  position: relative;
   overflow: hidden;
-  background: #eef2f8;
-  aspect-ratio: 3 / 4;
 }
-.p-media-img {
-  object-fit: cover;
-  object-position: top center;
-  opacity: 0;
-  transition: opacity 0.35s ease;
+@media (max-width: 720px) {
+  .p-swatch {
+    height: 380px;
+  }
 }
-.p-media-img.is-active {
-  opacity: 1;
+.p-swatch-photo {
+  padding: 0;
+  background: var(--pale);
 }
-.p-media-empty {
-  height: 100%;
+.p-swatch-photo img {
   width: 100%;
-  background: linear-gradient(155deg, #dbe8fb 0%, #aecafb 100%);
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.p-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 2;
+}
+.p-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transition: all 0.15s ease;
+}
+.p-dot.active {
+  background: var(--white);
+  width: 14px;
+  border-radius: 3px;
 }
 .garment-mark {
   width: 84px;
@@ -1102,10 +1119,77 @@ footer {
   align-items: center;
   justify-content: center;
 }
+.modal-swatch-photo {
+  aspect-ratio: auto;
+  height: 480px;
+  background: var(--pale);
+}
+@media (max-width: 640px) {
+  .modal-swatch-photo {
+    height: 380px;
+  }
+}
+.modal-swatch-photo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+.modal-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: var(--blue-deep);
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(12, 44, 85, 0.2);
+  z-index: 2;
+}
+.modal-arrow:hover {
+  background: var(--white);
+}
+.modal-arrow-left {
+  left: 14px;
+}
+.modal-arrow-right {
+  right: 14px;
+}
+.modal-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+.modal-dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(12, 44, 85, 0.25);
+  transition: all 0.15s ease;
+}
+.modal-dot.active {
+  background: var(--blue);
+  width: 18px;
+  border-radius: 3px;
+}
 .modal-swatch .garment-mark {
   width: 26%;
   height: 26%;
   opacity: 0.55;
+
 }
 .modal-swatch .ph-label {
   position: absolute;
@@ -1116,87 +1200,6 @@ footer {
   background: rgba(255, 255, 255, 0.8);
   padding: 5px 12px;
   border-radius: 999px;
-}
-.modal-media {
-  border-radius: 28px 28px 0 0;
-  overflow: hidden;
-}
-
-/* ---------- CAROUSEL (product modal) ---------- */
-.carousel {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  background: #eef2f8;
-}
-.carousel-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.carousel-img {
-  object-fit: cover;
-  object-position: top center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-.carousel-img.is-active {
-  opacity: 1;
-}
-.carousel-empty {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(155deg, #dbe8fb 0%, #aecafb 100%);
-}
-.carousel-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.88);
-  color: var(--blue-deep);
-  font-size: 22px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(12, 44, 85, 0.2);
-  z-index: 2;
-}
-.carousel-arrow:hover {
-  background: var(--white);
-}
-.carousel-arrow-prev {
-  left: 14px;
-}
-.carousel-arrow-next {
-  right: 14px;
-}
-.carousel-dots {
-  position: absolute;
-  bottom: 14px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 7px;
-  z-index: 2;
-}
-.carousel-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(255, 255, 255, 0.65);
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-.carousel-dot.is-active {
-  transform: scale(1.35);
 }
 .modal-body {
   padding: 32px 34px 36px;

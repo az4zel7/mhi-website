@@ -1,17 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-
-const HOVER_INTERVAL_MS = 900;
-const SHORT_DESC_MAX = 90;
-
-function shortenDescription(text) {
-  if (!text || text.length <= SHORT_DESC_MAX) return text;
-  const cut = text.slice(0, SHORT_DESC_MAX);
-  const lastSpace = cut.lastIndexOf(" ");
-  return `${cut.slice(0, lastSpace > 40 ? lastSpace : SHORT_DESC_MAX)}…`;
-}
+import { useState, useRef, useCallback } from "react";
 
 function GarmentMark({ accent }) {
   return (
@@ -32,67 +21,47 @@ function GarmentMark({ accent }) {
   );
 }
 
-export default function ProductCard({ product, brandAccent, onSelect }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const intervalRef = useRef(null);
-  const images = product.images || [];
-  const hasImages = images.length > 0;
+const HOVER_CYCLE_MS = 700;
 
-  const stopCycle = () => {
+export default function ProductCard({ product, accent, onSelect }) {
+  const hasPhotos = Array.isArray(product.images) && product.images.length > 0;
+  const [index, setIndex] = useState(0);
+  const intervalRef = useRef(null);
+
+  const startCycle = useCallback(() => {
+    if (!hasPhotos || product.images.length < 2) return;
+    intervalRef.current = setInterval(() => {
+      setIndex((i) => (i + 1) % product.images.length);
+    }, HOVER_CYCLE_MS);
+  }, [hasPhotos, product.images]);
+
+  const stopCycle = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-  };
-
-  const startCycle = () => {
-    if (images.length < 2) return;
-    stopCycle();
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % images.length);
-    }, HOVER_INTERVAL_MS);
-  };
-
-  useEffect(() => stopCycle, []);
+    setIndex(0);
+  }, []);
 
   return (
     <button
       className="p-card"
-      onClick={onSelect}
-      onMouseEnter={hasImages ? startCycle : undefined}
-      onMouseLeave={
-        hasImages
-          ? () => {
-              stopCycle();
-              setActiveIndex(0);
-            }
-          : undefined
-      }
-      onFocus={hasImages ? startCycle : undefined}
-      onBlur={
-        hasImages
-          ? () => {
-              stopCycle();
-              setActiveIndex(0);
-            }
-          : undefined
-      }
+      onClick={() => onSelect(product)}
+      onMouseEnter={startCycle}
+      onMouseLeave={stopCycle}
       aria-haspopup="dialog"
-      style={{ "--brand-accent": brandAccent }}
+      style={{ "--brand-accent": accent }}
     >
-      {hasImages ? (
-        <div className="p-media">
-          {images.map((src, i) => (
-            <Image
-              key={src}
-              src={src}
-              alt={product.name}
-              fill
-              sizes="(max-width: 480px) 100vw, (max-width: 860px) 50vw, 33vw"
-              className={`p-media-img${i === activeIndex ? " is-active" : ""}`}
-              priority={i === 0}
-            />
-          ))}
+      {hasPhotos ? (
+        <div className="p-swatch p-swatch-photo">
+          <img src={product.images[index]} alt={product.name} loading="lazy" />
+          {product.images.length > 1 && (
+            <div className="p-dots">
+              {product.images.map((_, i) => (
+                <span key={i} className={`p-dot${i === index ? " active" : ""}`} />
+              ))}
+            </div>
+          )}
           <span className="p-view-tag">View details</span>
         </div>
       ) : (
@@ -100,13 +69,13 @@ export default function ProductCard({ product, brandAccent, onSelect }) {
           className="p-swatch"
           style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
         >
-          <GarmentMark accent={brandAccent} />
+          <GarmentMark accent={accent} />
           <span className="p-view-tag">View details</span>
         </div>
       )}
       <div className="p-info">
         <h3>{product.name}</h3>
-        <p>{shortenDescription(product.description)}</p>
+        <p>{product.description}</p>
       </div>
     </button>
   );

@@ -95,8 +95,8 @@ export default function ProductTabs() {
               <ProductCard
                 key={product.name}
                 product={product}
-                brandAccent={brand.accent}
-                onSelect={() => setSelectedProduct(product)}
+                accent={brand.accent}
+                onSelect={setSelectedProduct}
               />
             ))}
           </div>

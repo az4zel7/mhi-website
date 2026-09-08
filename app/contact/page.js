@@ -96,7 +96,7 @@ export default function ContactPage() {
               <div>
                 <div className="contact-item-label">Email</div>
                 <div className="contact-item-value placeholder">
-                  bombaclaat@richmillionaire.com
+                  Add your email address here
                 </div>
               </div>
             </div>

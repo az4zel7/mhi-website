@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import ProductCarousel from "@/components/ProductCarousel";
+import { useEffect, useState } from "react";
 
 function GarmentMark({ accent }) {
   return (
@@ -23,9 +22,23 @@ function GarmentMark({ accent }) {
 }
 
 export default function ProductModal({ product, brandName, accent, onClose }) {
+  const hasPhotos = Array.isArray(product?.images) && product.images.length > 0;
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((i) => (i + 1) % product.images.length);
+  const prev = () => setIndex((i) => (i - 1 + product.images.length) % product.images.length);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [product]);
+
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
+      if (hasPhotos && product.images.length > 1) {
+        if (e.key === "ArrowRight") next();
+        if (e.key === "ArrowLeft") prev();
+      }
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -33,11 +46,10 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onClose, hasPhotos, product]);
 
   if (!product) return null;
-
-  const hasImages = (product.images || []).length > 0;
 
   return (
     <div
@@ -51,13 +63,38 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
         <button className="modal-close" aria-label="Close" onClick={onClose}>
           &times;
         </button>
-        {hasImages ? (
-          <div className="modal-media">
-            <ProductCarousel
-              images={product.images}
-              alt={product.name}
-              accent={accent}
-            />
+
+        {hasPhotos ? (
+          <div className="modal-swatch modal-swatch-photo">
+            <img src={product.images[index]} alt={product.name} />
+            {product.images.length > 1 && (
+              <>
+                <button
+                  className="modal-arrow modal-arrow-left"
+                  onClick={prev}
+                  aria-label="Previous image"
+                >
+                  &#8592;
+                </button>
+                <button
+                  className="modal-arrow modal-arrow-right"
+                  onClick={next}
+                  aria-label="Next image"
+                >
+                  &#8594;
+                </button>
+                <div className="modal-dots">
+                  {product.images.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`modal-dot${i === index ? " active" : ""}`}
+                      onClick={() => setIndex(i)}
+                      aria-label={`Show image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         ) : (
           <div
@@ -68,13 +105,20 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
             <span className="ph-label">Photo pending</span>
           </div>
         )}
+
         <div className="modal-body">
           <div className="modal-brand-tag" style={{ background: accent }}>
             {brandName}
           </div>
           <h3 id="product-modal-title">{product.name}</h3>
-          <p className="modal-summary">{product.description}</p>
-          {product.details && <p className="modal-details">{product.details}</p>}
+          {product.details && product.details.trim().startsWith(product.description?.trim()) ? (
+            <p className="modal-details">{product.details}</p>
+          ) : (
+            <>
+              <p className="modal-summary">{product.description}</p>
+              <p className="modal-details">{product.details}</p>
+            </>
+          )}
         </div>
       </div>
     </div>
