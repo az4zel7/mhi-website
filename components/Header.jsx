@@ -7,6 +7,7 @@ import { useState } from "react";
 import mhiLogo from "@/public/logos/mhi.png";
 import { useLocale } from "@/lib/i18n/LocaleContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import BrandsMenu from "@/components/BrandsMenu";
 
 export default function Header() {
   const pathname = usePathname();
@@ -18,10 +19,11 @@ export default function Header() {
   const NAV_ITEMS = [
     { href: withLocale(""), label: dict.nav.home },
     { href: withLocale("/about"), label: dict.nav.about },
-    { href: withLocale("/products"), label: dict.nav.products },
   ];
   const contactHref = withLocale("/contact");
   const homeHref = withLocale("");
+  const productsHref = withLocale("/products");
+  const isProductsActive = pathname === productsHref;
 
   return (
     <header className="site-nav">
@@ -43,16 +45,26 @@ export default function Header() {
         </button>
 
         <nav className={`links${open ? " open" : ""}`}>
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={pathname === item.href ? "active" : ""}
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
+          <Link
+            href={NAV_ITEMS[0].href}
+            className={pathname === NAV_ITEMS[0].href ? "active" : ""}
+            onClick={() => setOpen(false)}
+          >
+            {NAV_ITEMS[0].label}
+          </Link>
+          <Link
+            href={NAV_ITEMS[1].href}
+            className={pathname === NAV_ITEMS[1].href ? "active" : ""}
+            onClick={() => setOpen(false)}
+          >
+            {NAV_ITEMS[1].label}
+          </Link>
+
+          <span className="brands-menu-desktop">
+            <BrandsMenu active={isProductsActive} />
+          </span>
+          <BrandsMenu mobile onNavigate={() => setOpen(false)} />
+
           <LanguageSwitcher onNavigate={() => setOpen(false)} />
           <Link
             href={contactHref}

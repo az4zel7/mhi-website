@@ -2,9 +2,10 @@
   "nav": {
     "home": "मुख्यपृष्ठ",
     "about": "आमच्याबद्दल",
-    "products": "उत्पादने",
+    "products": "ब्रँड्स",
     "contactUs": "संपर्क करा",
-    "tagline": "1973 पासून · मुंबई"
+    "tagline": "1973 पासून · मुंबई",
+    "viewAllBrands": "सर्व ब्रँड्स पहा"
   },
   "footer": {
     "tagline": "स्थापना 1973, मुंबई — Milton · ANICY · NICY · Avron",

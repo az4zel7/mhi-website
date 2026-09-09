@@ -2,9 +2,10 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "products": "Products",
+    "products": "Brands",
     "contactUs": "Contact us",
-    "tagline": "Since 1973 · Mumbai"
+    "tagline": "Since 1973 · Mumbai",
+    "viewAllBrands": "View all brands"
   },
   "footer": {
     "tagline": "Est. 1973, Mumbai — Milton · ANICY · NICY · Avron",
