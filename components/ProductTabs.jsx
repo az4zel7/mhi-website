@@ -1,19 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { BRANDS } from "@/lib/brands";
+import { getBrands } from "@/lib/brands";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 import ProductModal from "@/components/ProductModal";
 import ProductCard from "@/components/ProductCard";
 
-// Products page shows only ANICY, NICY and Avron as tabs — Milton isn't a
-// standalone product line here. It still appears on the Home page brand strip.
-const TAB_BRANDS = BRANDS.filter((b) => b.slug !== "milton");
-
 export default function ProductTabs() {
+  const { locale } = useLocale();
   const searchParams = useSearchParams();
   const initialBrand = searchParams.get("brand");
+
+  // Products page shows only ANICY, NICY and Avron as tabs — Milton isn't a
+  // standalone product line here. It still appears on the Home page brand strip.
+  const TAB_BRANDS = useMemo(
+    () => getBrands(locale).filter((b) => b.slug !== "milton"),
+    [locale]
+  );
+
   const [active, setActive] = useState(
     TAB_BRANDS.some((b) => b.slug === initialBrand) ? initialBrand : TAB_BRANDS[0].slug
   );
@@ -23,9 +29,9 @@ export default function ProductTabs() {
     if (initialBrand && TAB_BRANDS.some((b) => b.slug === initialBrand)) {
       setActive(initialBrand);
     }
-  }, [initialBrand]);
+  }, [initialBrand, TAB_BRANDS]);
 
-  const brand = TAB_BRANDS.find((b) => b.slug === active);
+  const brand = TAB_BRANDS.find((b) => b.slug === active) || TAB_BRANDS[0];
 
   return (
     <>

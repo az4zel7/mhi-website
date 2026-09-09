@@ -1,20 +1,21 @@
 "use client";
 
 import { useState } from "react";
-
-const BRAND_OPTIONS = ["Milton", "ANICY", "NICY", "Avron", "Not sure yet / general enquiry"];
+import { useLocale } from "@/lib/i18n/LocaleContext";
 
 const initialState = {
   name: "",
   company: "",
   email: "",
   phone: "",
-  brand: BRAND_OPTIONS[0],
+  brand: "",
   message: "",
 };
 
 export default function ContactForm() {
-  const [form, setForm] = useState(initialState);
+  const { dict } = useLocale();
+  const brandOptions = dict.form.brandOptions;
+  const [form, setForm] = useState({ ...initialState, brand: brandOptions[0] });
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
@@ -30,7 +31,7 @@ export default function ContactForm() {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
-      setForm(initialState);
+      setForm({ ...initialState, brand: brandOptions[0] });
     } catch (err) {
       setStatus("error");
     }
@@ -40,23 +41,23 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit}>
       <div className="field-row">
         <div className="field">
-          <label htmlFor="f-name">Full name</label>
+          <label htmlFor="f-name">{dict.form.fullName}</label>
           <input
             id="f-name"
             type="text"
             required
-            placeholder="Your name"
+            placeholder={dict.form.fullNamePlaceholder}
             value={form.name}
             onChange={update("name")}
           />
         </div>
         <div className="field">
-          <label htmlFor="f-company">Company name</label>
+          <label htmlFor="f-company">{dict.form.companyName}</label>
           <input
             id="f-company"
             type="text"
             required
-            placeholder="Business name"
+            placeholder={dict.form.companyNamePlaceholder}
             value={form.company}
             onChange={update("company")}
           />
@@ -65,23 +66,23 @@ export default function ContactForm() {
 
       <div className="field-row">
         <div className="field">
-          <label htmlFor="f-email">Email</label>
+          <label htmlFor="f-email">{dict.form.email}</label>
           <input
             id="f-email"
             type="email"
             required
-            placeholder="you@company.com"
+            placeholder={dict.form.emailPlaceholder}
             value={form.email}
             onChange={update("email")}
           />
         </div>
         <div className="field">
-          <label htmlFor="f-phone">Phone</label>
+          <label htmlFor="f-phone">{dict.form.phone}</label>
           <input
             id="f-phone"
             type="tel"
             required
-            placeholder="+91 "
+            placeholder={dict.form.phonePlaceholder}
             value={form.phone}
             onChange={update("phone")}
           />
@@ -89,9 +90,9 @@ export default function ContactForm() {
       </div>
 
       <div className="field">
-        <label htmlFor="f-brand">Brand you&apos;re interested in</label>
+        <label htmlFor="f-brand">{dict.form.brandInterest}</label>
         <select id="f-brand" value={form.brand} onChange={update("brand")}>
-          {BRAND_OPTIONS.map((opt) => (
+          {brandOptions.map((opt) => (
             <option key={opt} value={opt}>
               {opt}
             </option>
@@ -100,31 +101,23 @@ export default function ContactForm() {
       </div>
 
       <div className="field">
-        <label htmlFor="f-message">Message</label>
+        <label htmlFor="f-message">{dict.form.message}</label>
         <textarea
           id="f-message"
           rows={3}
           required
-          placeholder="Tell us about your business and what you're looking for"
+          placeholder={dict.form.messagePlaceholder}
           value={form.message}
           onChange={update("message")}
         />
       </div>
 
       <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
-        {status === "sending" ? "Sending…" : "Send enquiry"}
+        {status === "sending" ? dict.form.sending : dict.form.send}
       </button>
 
-      {status === "success" && (
-        <p className="form-status success">
-          Thanks — your enquiry has been received. We&apos;ll be in touch shortly.
-        </p>
-      )}
-      {status === "error" && (
-        <p className="form-status error">
-          Something went wrong sending that. Please try again or email us directly.
-        </p>
-      )}
+      {status === "success" && <p className="form-status success">{dict.form.success}</p>}
+      {status === "error" && <p className="form-status error">{dict.form.error}</p>}
     </form>
   );
 }

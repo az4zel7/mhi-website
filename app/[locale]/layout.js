@@ -1,7 +1,10 @@
 import { Poppins, Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { LocaleProvider } from "@/lib/i18n/LocaleContext";
+import { getDictionary } from "@/lib/i18n/getDictionary";
+import { locales } from "@/lib/i18n/config";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -23,13 +26,22 @@ export const metadata = {
     "Milton Hosiery Industries designs and owns Milton, ANICY, NICY and Avron. Family-run since 1973 in Mumbai. Wholesale, distribution and institutional enquiries welcome.",
 };
 
-export default function RootLayout({ children }) {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
+
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang={locale} className={`${poppins.variable} ${inter.variable}`}>
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <LocaleProvider locale={locale} dict={dict}>
+          <Header />
+          {children}
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   );

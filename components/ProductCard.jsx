@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 
 function GarmentMark({ accent }) {
   return (
@@ -24,6 +25,7 @@ function GarmentMark({ accent }) {
 const HOVER_CYCLE_MS = 700;
 
 export default function ProductCard({ product, accent, onSelect }) {
+  const { dict } = useLocale();
   const hasPhotos = Array.isArray(product.images) && product.images.length > 0;
   const [index, setIndex] = useState(0);
   const intervalRef = useRef(null);
@@ -62,7 +64,7 @@ export default function ProductCard({ product, accent, onSelect }) {
               ))}
             </div>
           )}
-          <span className="p-view-tag">View details</span>
+          <span className="p-view-tag">{dict.common.viewDetails}</span>
         </div>
       ) : (
         <div
@@ -70,7 +72,7 @@ export default function ProductCard({ product, accent, onSelect }) {
           style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
         >
           <GarmentMark accent={accent} />
-          <span className="p-view-tag">View details</span>
+          <span className="p-view-tag">{dict.common.viewDetails}</span>
         </div>
       )}
       <div className="p-info">

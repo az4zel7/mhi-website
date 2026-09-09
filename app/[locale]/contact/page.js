@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import { getDictionary } from "@/lib/i18n/getDictionary";
 
 export const metadata = {
   title: "Contact — Milton Hosiery Industries",
@@ -39,17 +40,18 @@ function ClockIcon() {
   );
 }
 
-export default function ContactPage() {
+export default async function ContactPage({ params }) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
+
   return (
     <div>
       <section className="wrap contact-hero">
         <h1 style={{ fontSize: "clamp(26px,3.2vw,36px)", maxWidth: "20ch" }}>
-          Tell us about your business.
+          {dict.contact.title}
         </h1>
         <p className="about-lede" style={{ marginTop: "10px", marginBottom: "28px", fontSize: "15.5px" }}>
-          This form is the fastest way to reach us for wholesale, distribution
-          or institutional supply. We reply directly — no call centre in
-          between.
+          {dict.contact.lede}
         </p>
 
         <div className="contact-grid">
@@ -59,17 +61,15 @@ export default function ContactPage() {
 
           <div className="contact-panel">
             <div className="blob contact-panel-blob" />
-            <h2>Reach us directly</h2>
-            <p className="contact-panel-sub">
-              Prefer to skip the form? Call or write to us directly.
-            </p>
+            <h2>{dict.contact.panelHeading}</h2>
+            <p className="contact-panel-sub">{dict.contact.panelSub}</p>
 
             <div className="contact-item">
               <span className="contact-icon">
                 <PinIcon />
               </span>
               <div>
-                <div className="contact-item-label">Office address</div>
+                <div className="contact-item-label">{dict.contact.officeAddress}</div>
                 <div className="contact-item-value">
                   Shroff Mansion, 3rd Bhoiwada Ln, Marine Lines East,
                   Panjarpole, Bhuleshwar, Mumbai, Maharashtra 400002
@@ -82,7 +82,7 @@ export default function ContactPage() {
                 <PhoneIcon />
               </span>
               <div>
-                <div className="contact-item-label">Phone</div>
+                <div className="contact-item-label">{dict.contact.phone}</div>
                 <div className="contact-item-value">
                   <a href="tel:+917045208003">+91 70452 08003</a>
                 </div>
@@ -94,9 +94,9 @@ export default function ContactPage() {
                 <MailIcon />
               </span>
               <div>
-                <div className="contact-item-label">Email</div>
+                <div className="contact-item-label">{dict.contact.email}</div>
                 <div className="contact-item-value placeholder">
-                  Add your email address here
+                  {dict.contact.emailPlaceholder}
                 </div>
               </div>
             </div>
@@ -106,8 +106,8 @@ export default function ContactPage() {
                 <ClockIcon />
               </span>
               <div>
-                <div className="contact-item-label">Business hours</div>
-                <div className="contact-item-value">10:00 AM – 7:30 PM</div>
+                <div className="contact-item-label">{dict.contact.businessHours}</div>
+                <div className="contact-item-value">{dict.contact.hoursValue}</div>
               </div>
             </div>
           </div>

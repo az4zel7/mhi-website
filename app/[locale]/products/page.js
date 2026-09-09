@@ -1,12 +1,16 @@
 import { Suspense } from "react";
 import CtaPanel from "@/components/CtaPanel";
 import ProductTabs from "@/components/ProductTabs";
+import { getDictionary } from "@/lib/i18n/getDictionary";
 
 export const metadata = {
   title: "Products — Milton Hosiery Industries",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage({ params }) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
+
   return (
     <div>
       <Suspense fallback={null}>
@@ -15,8 +19,10 @@ export default function ProductsPage() {
 
       <section className="wrap" style={{ paddingTop: "20px", paddingBottom: "110px" }}>
         <CtaPanel
-          heading="Interested in stocking one of our brands?"
-          copy="Let us know which brand, your business type and expected volumes."
+          heading={dict.products.ctaHeading}
+          copy={dict.products.ctaCopy}
+          buttonLabel={dict.common.startEnquiry}
+          href={`/${locale}/contact`}
         />
       </section>
     </div>

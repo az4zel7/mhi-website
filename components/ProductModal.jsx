@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLocale } from "@/lib/i18n/LocaleContext";
 
 function GarmentMark({ accent }) {
   return (
@@ -22,6 +23,7 @@ function GarmentMark({ accent }) {
 }
 
 export default function ProductModal({ product, brandName, accent, onClose }) {
+  const { dict } = useLocale();
   const hasPhotos = Array.isArray(product?.images) && product.images.length > 0;
   const [index, setIndex] = useState(0);
 
@@ -102,7 +104,7 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
             style={{ "--swatch-a": product.swatchA, "--swatch-b": product.swatchB }}
           >
             <GarmentMark accent={accent} />
-            <span className="ph-label">Photo pending</span>
+            <span className="ph-label">{dict.common.photoPending}</span>
           </div>
         )}
 

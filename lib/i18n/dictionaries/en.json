@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "contactUs": "Contact us",
+    "tagline": "Since 1973 · Mumbai"
+  },
+  "footer": {
+    "tagline": "Est. 1973, Mumbai — Milton · ANICY · NICY · Avron",
+    "copyright": "© {year} Milton Hosiery Industries. All rights reserved."
+  },
+  "common": {
+    "startEnquiry": "Start a wholesale enquiry",
+    "getInTouch": "Get in touch",
+    "seeOurBrands": "See our brands",
+    "viewDetails": "View details",
+    "photoPending": "Photo pending",
+    "launchingSoon": "Launching soon"
+  },
+  "home": {
+    "eyebrow": "Family-run since 1973",
+    "title": "Apparel brands built for how people actually get dressed.",
+    "copy": "Milton Hosiery Industries designs and owns a portfolio of apparel brands out of Mumbai — now run by the second generation of the family that started it. We work with a small group of trusted manufacturing partners to bring each brand to retailers, distributors and institutional buyers across the country.",
+    "panelLabel": "What we do",
+    "panelFigure": "Brand & distribution",
+    "panelCopy": "We design, name and market each brand ourselves. Production runs through a small set of contract manufacturing partners — we don't operate our own factory floor.",
+    "sectionHeading": "One company, four distinct brands.",
+    "sectionCopy": "Each brand has its own name, audience and product range. We keep them separate on purpose — a distributor stocking ANICY and a boutique stocking NICY are reaching very different customers.",
+    "retailersHeading": "For retailers & distributors",
+    "retailersCopy": "We supply through wholesale channels only — there's no direct-to-consumer store to compete with your shelf. Tell us which brand and volumes you're interested in and we'll get back to you with terms.",
+    "institutionalHeading": "For institutional buyers",
+    "institutionalCopy": "If you're buying in bulk for uniforms, hospitality or another institutional use, our team can work with you directly on specification and lead times.",
+    "ctaHeading": "Ready to talk stock?",
+    "ctaCopy": "Send us a short note about your business and what you're looking for — we usually reply within a couple of working days."
+  },
+  "about": {
+    "eyebrow": "Our story",
+    "title": "Fifty years of dressing everyday India, one brand at a time.",
+    "lede": "Milton Hosiery Industries was founded in 1973 in Mumbai. Today it's run by the second generation of the founding family, and it has grown from a single product into a small portfolio of brands, each built for a different customer.",
+    "howHeading": "How the company works",
+    "howCopy": "We are a brand and distribution company, not a factory. Our team designs each brand's products and range, and production is carried out by four to eight external manufacturing partners we work with closely on quality and consistency.",
+    "noteStrong": "What this means for buyers:",
+    "noteRest": "you're working with the people who own and stand behind the brand, with the flexibility of a small, hands-on team rather than a large factory bureaucracy.",
+    "teamHeading": "A small team by design",
+    "teamCopy": "Milton Hosiery Industries is run by a small team, which is part of why our brands stay closely managed and consistent. It also means we're able to respond directly and personally to wholesale enquiries, rather than routing you through layers of sales staff.",
+    "milestonesHeading": "Milestones",
+    "milestonesCopy": "The key moments in our history. Rows marked \"placeholder\" need your confirmed dates and details before this page goes live.",
+    "tagLabels": { "confirmed": "confirmed", "placeholder": "placeholder" },
+    "timeline": [
+      { "year": "1973", "desc": "Founded in Mumbai with our first product, Milton Nylon Trunks.", "tag": "confirmed" },
+      { "year": "19XX", "desc": "Add a milestone — e.g. second generation joins the business.", "tag": "placeholder" },
+      { "year": "19XX", "desc": "Add a milestone — e.g. ANICY launches.", "tag": "placeholder" },
+      { "year": "20XX", "desc": "Add a milestone — e.g. NICY launches.", "tag": "placeholder" },
+      { "year": "Soon", "desc": "Avron launches — our newest, premium men's performance brand.", "tag": "confirmed" }
+    ],
+    "ctaHeading": "Want to know more before you order?",
+    "ctaCopy": "Happy to walk you through our brands, minimum order quantities and lead times directly."
+  },
+  "products": {
+    "ctaHeading": "Interested in stocking one of our brands?",
+    "ctaCopy": "Let us know which brand, your business type and expected volumes.",
+    "photoNote": "Product photography shown here is placeholder — swap in real catalog images before launch."
+  },
+  "contact": {
+    "title": "Tell us about your business.",
+    "lede": "This form is the fastest way to reach us for wholesale, distribution or institutional supply. We reply directly — no call centre in between.",
+    "panelHeading": "Reach us directly",
+    "panelSub": "Prefer to skip the form? Call or write to us directly.",
+    "officeAddress": "Office address",
+    "phone": "Phone",
+    "email": "Email",
+    "businessHours": "Business hours",
+    "emailPlaceholder": "Add your email address here",
+    "hoursValue": "10:00 AM – 7:30 PM"
+  },
+  "form": {
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Your name",
+    "companyName": "Company name",
+    "companyNamePlaceholder": "Business name",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
+    "phone": "Phone",
+    "phonePlaceholder": "+91 ",
+    "brandInterest": "Brand you're interested in",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your business and what you're looking for",
+    "send": "Send enquiry",
+    "sending": "Sending…",
+    "success": "Thanks — your enquiry has been received. We'll be in touch shortly.",
+    "error": "Something went wrong sending that. Please try again or email us directly.",
+    "brandOptions": ["Milton", "ANICY", "NICY", "Avron", "Not sure yet / general enquiry"]
+  }
+}
