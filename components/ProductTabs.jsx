@@ -54,7 +54,7 @@ export default function ProductTabs() {
                     alt=""
                     width={80}
                     height={30}
-                    style={{ height: "22px", width: "auto" }}
+                    style={{ height: "30px", width: "auto" }}
                   />
                 )}
                 {b.name}
