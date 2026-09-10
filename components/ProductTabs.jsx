@@ -9,7 +9,7 @@ import ProductModal from "@/components/ProductModal";
 import ProductCard from "@/components/ProductCard";
 
 export default function ProductTabs() {
-  const { locale } = useLocale();
+  const { locale, dict } = useLocale();
   const searchParams = useSearchParams();
   const initialBrand = searchParams.get("brand");
 
@@ -24,6 +24,7 @@ export default function ProductTabs() {
     TAB_BRANDS.some((b) => b.slug === initialBrand) ? initialBrand : TAB_BRANDS[0].slug
   );
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState("all");
 
   useEffect(() => {
     if (initialBrand && TAB_BRANDS.some((b) => b.slug === initialBrand)) {
@@ -32,6 +33,24 @@ export default function ProductTabs() {
   }, [initialBrand, TAB_BRANDS]);
 
   const brand = TAB_BRANDS.find((b) => b.slug === active) || TAB_BRANDS[0];
+
+  // Some brands (currently NICY) split products into sub-categories, e.g.
+  // girls' vs ladies' wear. Only show filter chips when a brand actually has them.
+  const categories = useMemo(() => {
+    const found = new Set();
+    brand.products.forEach((p) => p.category && found.add(p.category));
+    return Array.from(found);
+  }, [brand]);
+
+  const CATEGORY_LABELS = {
+    girls: dict.products.categoryGirls,
+    ladies: dict.products.categoryLadies,
+  };
+
+  const visibleProducts =
+    categoryFilter === "all"
+      ? brand.products
+      : brand.products.filter((p) => p.category === categoryFilter);
 
   return (
     <>
@@ -46,6 +65,7 @@ export default function ProductTabs() {
                 onClick={() => {
                   setActive(b.slug);
                   setSelectedProduct(null);
+                  setCategoryFilter("all");
                 }}
               >
                 {b.logo && (
@@ -96,16 +116,37 @@ export default function ProductTabs() {
             <p>{brand.comingSoon.copy}</p>
           </div>
         ) : (
-          <div className="product-grid">
-            {brand.products.map((product) => (
-              <ProductCard
-                key={product.name}
-                product={product}
-                accent={brand.accent}
-                onSelect={setSelectedProduct}
-              />
-            ))}
-          </div>
+          <>
+            {categories.length > 0 && (
+              <div className="category-filter" style={{ "--brand-accent": brand.accent }}>
+                <button
+                  className={`category-chip${categoryFilter === "all" ? " active" : ""}`}
+                  onClick={() => setCategoryFilter("all")}
+                >
+                  {dict.products.categoryAll}
+                </button>
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    className={`category-chip${categoryFilter === cat ? " active" : ""}`}
+                    onClick={() => setCategoryFilter(cat)}
+                  >
+                    {CATEGORY_LABELS[cat] || cat}
+                  </button>
+                ))}
+              </div>
+            )}
+            <div className="product-grid">
+              {visibleProducts.map((product) => (
+                <ProductCard
+                  key={product.name}
+                  product={product}
+                  accent={brand.accent}
+                  onSelect={setSelectedProduct}
+                />
+              ))}
+            </div>
+          </>
         )}
       </section>
 

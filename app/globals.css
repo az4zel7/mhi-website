@@ -887,6 +887,30 @@ h1.hero-title {
   margin: 0;
 }
 
+.category-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.category-chip {
+  background: var(--pale);
+  border: none;
+  padding: 9px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-radius: 999px;
+  transition: all 0.18s ease;
+}
+.category-chip:hover {
+  color: var(--blue-deep);
+}
+.category-chip.active {
+  background: var(--brand-accent, var(--blue));
+  color: var(--white);
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

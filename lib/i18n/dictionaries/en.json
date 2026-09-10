@@ -61,7 +61,10 @@
   "products": {
     "ctaHeading": "Interested in stocking one of our brands?",
     "ctaCopy": "Let us know which brand, your business type and expected volumes.",
-    "photoNote": "Product photography shown here is placeholder — swap in real catalog images before launch."
+    "photoNote": "Product photography shown here is placeholder — swap in real catalog images before launch.",
+    "categoryGirls": "Girls' wear",
+    "categoryLadies": "Ladies' wear",
+    "categoryAll": "All"
   },
   "contact": {
     "title": "Tell us about your business.",
