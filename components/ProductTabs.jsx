@@ -137,9 +137,9 @@ export default function ProductTabs() {
               </div>
             )}
             <div className="product-grid">
-              {visibleProducts.map((product) => (
+              {visibleProducts.map((product, idx) => (
                 <ProductCard
-                  key={product.name}
+                  key={`${product.category || "x"}-${product.images?.[0] || product.name}-${idx}`}
                   product={product}
                   accent={brand.accent}
                   onSelect={setSelectedProduct}
