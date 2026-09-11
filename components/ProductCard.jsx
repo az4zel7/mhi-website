@@ -65,6 +65,7 @@ export default function ProductCard({ product, accent, onSelect }) {
             </div>
           )}
           <span className="p-view-tag">{dict.common.viewDetails}</span>
+          {product.price && <span className="p-price-tag">₹{product.price}</span>}
         </div>
       ) : (
         <div

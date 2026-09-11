@@ -1021,6 +1021,18 @@ h1.hero-title {
   opacity: 1;
   transform: none;
 }
+.p-price-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(12, 44, 85, 0.15);
+}
 .p-info {
   padding: 20px 22px 24px;
 }
@@ -1447,6 +1459,15 @@ footer {
 .modal-body h3 {
   font-size: 24px;
   margin-bottom: 12px;
+}
+.modal-price {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin-bottom: 14px;
+}
+.modal-price strong {
+  color: var(--blue-deep);
+  font-size: 17px;
 }
 .modal-summary {
   font-size: 15.5px;

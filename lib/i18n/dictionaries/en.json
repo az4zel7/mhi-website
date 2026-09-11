@@ -64,7 +64,9 @@
     "photoNote": "Product photography shown here is placeholder — swap in real catalog images before launch.",
     "categoryGirls": "Girls' wear",
     "categoryLadies": "Ladies' wear",
-    "categoryAll": "All"
+    "categoryAll": "All",
+    "wholesaleRate": "Wholesale rate",
+    "colorOptions": "Colour options"
   },
   "contact": {
     "title": "Tell us about your business.",
