@@ -65,7 +65,11 @@ export default function ProductCard({ product, accent, onSelect }) {
             </div>
           )}
           <span className="p-view-tag">{dict.common.viewDetails}</span>
-          {product.price && <span className="p-price-tag">₹{product.price}</span>}
+          {product.colorOptions && (
+            <span className="p-colors-tag">
+              {product.colorOptions} {dict.products.colorsShort}
+            </span>
+          )}
         </div>
       ) : (
         <div

@@ -113,9 +113,9 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
             {brandName}
           </div>
           <h3 id="product-modal-title">{product.name}</h3>
-          {product.price && (
+          {product.colorOptions && (
             <div className="modal-price">
-              {dict.products.wholesaleRate}: <strong>₹{product.price} /- net</strong>
+              {dict.products.colorOptions}: <strong>{product.colorOptions}</strong>
             </div>
           )}
           {product.details && product.details.trim().startsWith(product.description?.trim()) ? (
