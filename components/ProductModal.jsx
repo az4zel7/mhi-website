@@ -113,10 +113,31 @@ export default function ProductModal({ product, brandName, accent, onClose }) {
             {brandName}
           </div>
           <h3 id="product-modal-title">{product.name}</h3>
-          {product.colorOptions && (
-            <div className="modal-price">
-              {dict.products.colorOptions}: <strong>{product.colorOptions}</strong>
+          {product.colors ? (
+            <div className="modal-color-section">
+              <div className="modal-color-label">
+                {dict.products.colorOptions} ({product.colors.length})
+              </div>
+              <div className="modal-color-chips">
+                {product.colors.map((c, i) => (
+                  <span key={i} className="modal-color-chip">
+                    <span className="modal-color-chip-swatch" style={{ background: c.hex }} />
+                    {c.name}
+                  </span>
+                ))}
+              </div>
             </div>
+          ) : (
+            product.colorOptions && (
+              <div className="modal-price">
+                {dict.products.colorOptions}:{" "}
+                <span className="modal-color-dots" aria-label={String(product.colorOptions)}>
+                  {Array.from({ length: Math.min(product.colorOptions, 10) }).map((_, i) => (
+                    <span key={i} className="modal-color-dot" style={{ background: accent }} />
+                  ))}
+                </span>
+              </div>
+            )
           )}
           {product.details && product.details.trim().startsWith(product.description?.trim()) ? (
             <p className="modal-details">{product.details}</p>

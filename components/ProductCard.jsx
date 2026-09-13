@@ -65,10 +65,25 @@ export default function ProductCard({ product, accent, onSelect }) {
             </div>
           )}
           <span className="p-view-tag">{dict.common.viewDetails}</span>
-          {product.colorOptions && (
-            <span className="p-colors-tag">
-              {product.colorOptions} {dict.products.colorsShort}
+          {product.colors ? (
+            <span
+              className="p-colors-tag"
+              aria-label={`${product.colors.length} ${dict.products.colorsShort}: ${product.colors
+                .map((c) => c.name)
+                .join(", ")}`}
+            >
+              {product.colors.slice(0, 8).map((c, i) => (
+                <span key={i} className="p-color-dot" style={{ background: c.hex }} title={c.name} />
+              ))}
             </span>
+          ) : (
+            product.colorOptions && (
+              <span className="p-colors-tag" aria-label={`${product.colorOptions} ${dict.products.colorsShort}`}>
+                {Array.from({ length: Math.min(product.colorOptions, 8) }).map((_, i) => (
+                  <span key={i} className="p-color-dot" />
+                ))}
+              </span>
+            )
           )}
         </div>
       ) : (
