@@ -17,7 +17,8 @@
     "seeOurBrands": "See our brands",
     "viewDetails": "View details",
     "photoPending": "Photo pending",
-    "launchingSoon": "Launching soon"
+    "launchingSoon": "Launching soon",
+    "callUs": "Call us"
   },
   "home": {
     "eyebrow": "Family-run since 1973",
@@ -33,7 +34,44 @@
     "institutionalHeading": "For institutional buyers",
     "institutionalCopy": "If you're buying in bulk for uniforms, hospitality or another institutional use, our team can work with you directly on specification and lead times.",
     "ctaHeading": "Ready to talk stock?",
-    "ctaCopy": "Send us a short note about your business and what you're looking for — we usually reply within a couple of working days."
+    "ctaCopy": "Send us a short note about your business and what you're looking for — we usually reply within a couple of working days.",
+    "stats": [
+      {
+        "value": "1973",
+        "label": "Founded in Mumbai"
+      },
+      {
+        "value": "50+",
+        "label": "Years in business"
+      },
+      {
+        "value": "4",
+        "label": "Brands under one roof"
+      },
+      {
+        "value": "2nd",
+        "label": "Generation now running it"
+      }
+    ],
+    "featuredEyebrow": "From our brands",
+    "featuredHeading": "A closer look at what we make",
+    "featuredCopy": "A sample from ANICY and NICY — our two brands currently shipping product. Tap through to a brand's full catalogue for sizes, colourways and wholesale pricing.",
+    "featuredCtaLabel": "View full catalogue",
+    "testimonialsEyebrow": "What buyers say",
+    "testimonialsHeading": "Trusted by retailers and distributors",
+    "testimonialsCopy": "A couple of lines from people we work with. Replace these with real quotes from your retailers and distributors before this goes live.",
+    "testimonials": [
+      {
+        "quote": "Sample quote — replace with a real testimonial from a retailer or distributor you work with.",
+        "name": "Retailer name",
+        "role": "City, business type"
+      },
+      {
+        "quote": "Sample quote — replace with a real testimonial from a retailer or distributor you work with.",
+        "name": "Distributor name",
+        "role": "City, business type"
+      }
+    ]
   },
   "about": {
     "eyebrow": "Our story",
@@ -47,13 +85,36 @@
     "teamCopy": "Milton Hosiery Industries is run by a small team, which is part of why our brands stay closely managed and consistent. It also means we're able to respond directly and personally to wholesale enquiries, rather than routing you through layers of sales staff.",
     "milestonesHeading": "Milestones",
     "milestonesCopy": "The key moments in our history. Rows marked \"placeholder\" need your confirmed dates and details before this page goes live.",
-    "tagLabels": { "confirmed": "confirmed", "placeholder": "placeholder" },
+    "tagLabels": {
+      "confirmed": "confirmed",
+      "placeholder": "placeholder"
+    },
     "timeline": [
-      { "year": "1973", "desc": "Founded in Mumbai with our first product, Milton Nylon Trunks.", "tag": "confirmed" },
-      { "year": "19XX", "desc": "Add a milestone — e.g. second generation joins the business.", "tag": "placeholder" },
-      { "year": "19XX", "desc": "Add a milestone — e.g. ANICY launches.", "tag": "placeholder" },
-      { "year": "20XX", "desc": "Add a milestone — e.g. NICY launches.", "tag": "placeholder" },
-      { "year": "Soon", "desc": "Avron launches — our newest, premium men's performance brand.", "tag": "confirmed" }
+      {
+        "year": "1973",
+        "desc": "Founded in Mumbai with our first product, Milton Nylon Trunks.",
+        "tag": "confirmed"
+      },
+      {
+        "year": "19XX",
+        "desc": "Add a milestone — e.g. second generation joins the business.",
+        "tag": "placeholder"
+      },
+      {
+        "year": "19XX",
+        "desc": "Add a milestone — e.g. ANICY launches.",
+        "tag": "placeholder"
+      },
+      {
+        "year": "20XX",
+        "desc": "Add a milestone — e.g. NICY launches.",
+        "tag": "placeholder"
+      },
+      {
+        "year": "Soon",
+        "desc": "Avron launches — our newest, premium men's performance brand.",
+        "tag": "confirmed"
+      }
     ],
     "ctaHeading": "Want to know more before you order?",
     "ctaCopy": "Happy to walk you through our brands, minimum order quantities and lead times directly."
@@ -97,6 +158,12 @@
     "sending": "Sending…",
     "success": "Thanks — your enquiry has been received. We'll be in touch shortly.",
     "error": "Something went wrong sending that. Please try again or email us directly.",
-    "brandOptions": ["Milton", "ANICY", "NICY", "Avron", "Not sure yet / general enquiry"]
+    "brandOptions": [
+      "Milton",
+      "ANICY",
+      "NICY",
+      "Avron",
+      "Not sure yet / general enquiry"
+    ]
   }
 }

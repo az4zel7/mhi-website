@@ -2,6 +2,7 @@ import { Poppins, Inter } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import CallFab from "@/components/CallFab";
 import { LocaleProvider } from "@/lib/i18n/LocaleContext";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import { locales } from "@/lib/i18n/config";
@@ -41,6 +42,7 @@ export default async function RootLayout({ children, params }) {
           <Header />
           {children}
           <Footer />
+          <CallFab />
         </LocaleProvider>
       </body>
     </html>
