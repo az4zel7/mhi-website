@@ -8,27 +8,56 @@ export const metadata = {
 export default async function AboutPage({ params }) {
   const { locale } = await params;
   const dict = getDictionary(locale);
+  const a = dict.about;
 
   return (
     <div>
       <section className="wrap about-hero" style={{ paddingBottom: 0 }}>
-        <div className="eyebrow-line">{dict.about.eyebrow}</div>
-        <h1>{dict.about.title}</h1>
-        <p className="about-lede">{dict.about.lede}</p>
+        <div className="eyebrow-line">{a.eyebrow}</div>
+        <h1>{a.title}</h1>
+      </section>
+
+      <section className="wrap">
+        <div className="section-head" style={{ marginBottom: 0, maxWidth: "70ch" }}>
+          <h2>{a.heritageHeading}</h2>
+          <p>{a.heritageCopy}</p>
+        </div>
+      </section>
+
+      <section className="section-alt">
+        <div className="wrap">
+          <div className="section-head">
+            <h2>{a.brandsHeading}</h2>
+          </div>
+          <div className="about-brands">
+            {a.brands.map((b) => (
+              <div className="about-brand" key={b.name}>
+                <h3>{b.name}</h3>
+                <p>{b.desc}</p>
+                {b.soon && <span className="about-soon">{a.comingSoon}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="wrap">
         <div className="split">
           <div>
-            <h2>{dict.about.howHeading}</h2>
-            <p>{dict.about.howCopy}</p>
-            <div className="model-note">
-              <strong>{dict.about.noteStrong}</strong> {dict.about.noteRest}
+            <h2>{a.manufacturingHeading}</h2>
+            <p>{a.manufacturingCopy}</p>
+            <div className="about-stats">
+              {a.stats.map((s) => (
+                <div className="about-stat" key={s.label}>
+                  <div className="fig">{s.figure}</div>
+                  <div className="lbl">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
           <div>
-            <h2>{dict.about.teamHeading}</h2>
-            <p>{dict.about.teamCopy}</p>
+            <h2>{a.qualityHeading}</h2>
+            <p>{a.qualityCopy}</p>
           </div>
         </div>
       </section>
@@ -36,28 +65,34 @@ export default async function AboutPage({ params }) {
       <section className="section-alt">
         <div className="wrap">
           <div className="section-head">
-            <h2>{dict.about.milestonesHeading}</h2>
-            <p>{dict.about.milestonesCopy}</p>
+            <h2>{a.partnerHeading}</h2>
           </div>
-          <div className="timeline">
-            {dict.about.timeline.map((item, i) => (
-              <div className={`t-row${item.tag !== "confirmed" ? " placeholder" : ""}`} key={i}>
-                <div className="yr">{item.year}</div>
-                <div className="desc">
-                  {item.desc}
-                  <span className="tag-edit">{dict.about.tagLabels[item.tag]}</span>
-                </div>
-              </div>
+          <ul className="about-checks">
+            {a.partnerPoints.map((p) => (
+              <li key={p}>{p}</li>
             ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="wrap">
+        <div className="split">
+          <div>
+            <h2>{a.visionHeading}</h2>
+            <p>{a.visionCopy}</p>
+          </div>
+          <div>
+            <h2>{a.customersHeading}</h2>
+            <p>{a.customersCopy}</p>
           </div>
         </div>
       </section>
 
       <section className="wrap" style={{ paddingBottom: "110px" }}>
         <CtaPanel
-          heading={dict.about.ctaHeading}
-          copy={dict.about.ctaCopy}
-          buttonLabel={dict.common.getInTouch}
+          heading={a.ctaHeading}
+          copy={a.ctaCopy}
+          buttonLabel={a.ctaButton}
           href={`/${locale}/contact`}
         />
       </section>

@@ -65,7 +65,7 @@ export default function BrandsMenu({ mobile = false, active, onNavigate }) {
             {brands.map((b) => (
               <Link
                 key={b.slug}
-                href={`${allHref}?brand=${b.slug}`}
+                href={`${allHref}/${b.slug}`}
                 className="brands-subitem"
                 onClick={onNavigate}
               >
@@ -109,7 +109,7 @@ export default function BrandsMenu({ mobile = false, active, onNavigate }) {
             {brands.map((b) => (
               <Link
                 key={b.slug}
-                href={`${allHref}?brand=${b.slug}`}
+                href={`${allHref}/${b.slug}`}
                 className="brands-row"
                 onClick={() => setOpen(false)}
               >

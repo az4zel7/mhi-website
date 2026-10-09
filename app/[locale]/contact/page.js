@@ -1,5 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { SITE, waLink } from "@/lib/site";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 export const metadata = {
   title: "Contact — Milton Hosiery Industries",
@@ -47,9 +49,7 @@ export default async function ContactPage({ params }) {
   return (
     <div>
       <section className="wrap contact-hero">
-        <h1 style={{ fontSize: "clamp(26px,3.2vw,36px)", maxWidth: "20ch" }}>
-          {dict.contact.title}
-        </h1>
+        <h1>{dict.contact.title}</h1>
         <p className="about-lede" style={{ marginTop: "10px", marginBottom: "28px", fontSize: "15.5px" }}>
           {dict.contact.lede}
         </p>
@@ -60,7 +60,6 @@ export default async function ContactPage({ params }) {
           </div>
 
           <div className="contact-panel">
-            <div className="blob contact-panel-blob" />
             <h2>{dict.contact.panelHeading}</h2>
             <p className="contact-panel-sub">{dict.contact.panelSub}</p>
 
@@ -70,10 +69,7 @@ export default async function ContactPage({ params }) {
               </span>
               <div>
                 <div className="contact-item-label">{dict.contact.officeAddress}</div>
-                <div className="contact-item-value">
-                  Shroff Mansion, 3rd Bhoiwada Ln, Marine Lines East,
-                  Panjarpole, Bhuleshwar, Mumbai, Maharashtra 400002
-                </div>
+                <div className="contact-item-value">{SITE.address}</div>
               </div>
             </div>
 
@@ -84,22 +80,43 @@ export default async function ContactPage({ params }) {
               <div>
                 <div className="contact-item-label">{dict.contact.phone}</div>
                 <div className="contact-item-value">
-                  <a href="tel:+917045208003">+91 70452 08003</a>
+                  <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
                 </div>
               </div>
             </div>
 
             <div className="contact-item">
               <span className="contact-icon">
-                <MailIcon />
+                <WhatsAppIcon size={20} />
               </span>
               <div>
-                <div className="contact-item-label">{dict.contact.email}</div>
-                <div className="contact-item-value placeholder">
-                  {dict.contact.emailPlaceholder}
+                <div className="contact-item-label">{dict.contact.whatsapp}</div>
+                <div className="contact-item-value">
+                  <a
+                    href={waLink(dict.whatsapp.greeting)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {dict.contact.whatsappValue}
+                  </a>
                 </div>
               </div>
             </div>
+
+            {/* Only shown once a real address is set in lib/site.js */}
+            {SITE.email && (
+              <div className="contact-item">
+                <span className="contact-icon">
+                  <MailIcon />
+                </span>
+                <div>
+                  <div className="contact-item-label">{dict.contact.email}</div>
+                  <div className="contact-item-value">
+                    <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="contact-item">
               <span className="contact-icon">

@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/lib/i18n/LocaleContext";
+import { waLink } from "@/lib/site";
+import WhatsAppIcon from "./WhatsAppIcon";
+import { useEnquiry } from "./EnquiryProvider";
 
 const initialState = {
   name: "",
@@ -10,6 +13,7 @@ const initialState = {
   phone: "",
   brand: "",
   message: "",
+  website: "", // honeypot — must stay empty; see app/api/contact/route.js
 };
 
 export default function ContactForm() {
@@ -17,8 +21,32 @@ export default function ContactForm() {
   const brandOptions = dict.form.brandOptions;
   const [form, setForm] = useState({ ...initialState, brand: brandOptions[0] });
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const enquiry = useEnquiry();
+  const [fromList, setFromList] = useState(false);
+  const filled = useRef(false);
+
+  // If the visitor collected designs in their enquiry list, start the message with them.
+  useEffect(() => {
+    if (filled.current || !enquiry.ready || enquiry.count === 0) return;
+    filled.current = true;
+    setFromList(true);
+    setForm((f) => (f.message ? f : { ...f, message: enquiry.buildText() }));
+  }, [enquiry.ready, enquiry.count, enquiry]);
 
   const update = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
+
+  // Pre-filled WhatsApp message built from whatever the visitor has typed so far.
+  const whatsappHref = () => {
+    const lines = [
+      form.name && `Name: ${form.name}`,
+      form.company && `Company: ${form.company}`,
+      form.phone && `Phone: ${form.phone}`,
+      form.email && `Email: ${form.email}`,
+      form.brand && `Brand: ${form.brand}`,
+      form.message && `\n${form.message}`,
+    ].filter(Boolean);
+    return waLink(lines.length ? `Wholesale enquiry\n${lines.join("\n")}` : dict.whatsapp.greeting);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +60,8 @@ export default function ContactForm() {
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
       setForm({ ...initialState, brand: brandOptions[0] });
+      if (fromList) enquiry.clear(); // the list has been sent
+      setFromList(false);
     } catch (err) {
       setStatus("error");
     }
@@ -104,20 +134,54 @@ export default function ContactForm() {
         <label htmlFor="f-message">{dict.form.message}</label>
         <textarea
           id="f-message"
-          rows={3}
+          rows={fromList ? 9 : 3}
           required
           placeholder={dict.form.messagePlaceholder}
           value={form.message}
           onChange={update("message")}
         />
+        {fromList && <p className="form-note">{dict.enquiry.formNote}</p>}
       </div>
 
-      <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
-        {status === "sending" ? dict.form.sending : dict.form.send}
-      </button>
+      {/* Honeypot: hidden from people and screen readers, bots tend to fill it. */}
+      <div className="hp-field" aria-hidden="true">
+        <label htmlFor="f-website">Website</label>
+        <input
+          id="f-website"
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={update("website")}
+        />
+      </div>
 
-      {status === "success" && <p className="form-status success">{dict.form.success}</p>}
-      {status === "error" && <p className="form-status error">{dict.form.error}</p>}
+      <div className="form-actions">
+        <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
+          {status === "sending" ? dict.form.sending : dict.form.send}
+        </button>
+        <a
+          className="btn btn-whatsapp-outline"
+          href={whatsappHref()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <WhatsAppIcon />
+          {dict.form.sendViaWhatsApp}
+        </a>
+      </div>
+
+      {status === "success" && (
+        <p className="form-status success" role="status">
+          {dict.form.success}
+        </p>
+      )}
+      {status === "error" && (
+        <p className="form-status error" role="alert">
+          {dict.form.error}
+        </p>
+      )}
     </form>
   );
 }
